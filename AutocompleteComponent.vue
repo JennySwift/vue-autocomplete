@@ -4,6 +4,9 @@
             <label v-if="inputLabel" :for="autocompleteFieldId">{{ inputLabel | capitalize }}</label>
             <input
                 v-model="chosenOption[prop]"
+                v-on:keyup.down="downArrow()"
+                v-on:keyup.up="upArrow()"
+                v-on:keyup.enter="respondToEnter()"
                 v-on:keyup="respondToKeyup($event.keyCode)"
                 v-on:focus="respondToFocus()"
                 v-on:blur="hideDropdown()"
@@ -64,6 +67,52 @@
 
             /**
              *
+             */
+            hideDropdown: function () {
+                this.dropdown = false;
+            },
+
+            /**
+             *
+             */
+            showDropdown: function () {
+                this.dropdown = true;
+            },
+
+            /**
+             *
+             */
+            upArrow: function () {
+                if (this.currentIndex !== 0) {
+                    this.currentIndex--;
+                }
+            },
+
+            /**
+             *
+             */
+            downArrow: function () {
+                if (this.autocompleteOptions.length - 1 !== this.currentIndex) {
+                    this.currentIndex++;
+                }
+            },
+
+            /**
+             *
+             */
+            respondToEnter: function () {
+                if (this.dropdown) {
+                    //enter is for the autocomplete
+                    this.selectOption();
+                }
+                else {
+                    //enter is to add the entry
+                    this.functionOnEnter();
+                }
+            },
+
+            /**
+             *
              * @returns {{title: string, name: string}}
              */
             resetChosenOption: function () {
@@ -87,22 +136,6 @@
                     else {
                         this.populateOptions();
                     }
-
-                }
-                else if (keycode === 38) {
-                    //up arrow pressed
-                    if (this.currentIndex !== 0) {
-                        this.currentIndex--;
-                    }
-                }
-                else if (keycode === 40) {
-                    //down arrow pressed
-                    if (this.autocompleteOptions.length - 1 !== this.currentIndex) {
-                        this.currentIndex++;
-                    }
-                }
-                else if (keycode === 13) {
-                    this.respondToEnter();
                 }
             },
 
@@ -136,13 +169,6 @@
             /**
              *
              */
-            hideDropdown: function () {
-                this.dropdown = false;
-            },
-
-            /**
-             *
-             */
             populateOptions: function () {
                 if (!this.unfilteredAutocompleteOptions) {
                     this.populateOptionsFromDatabase();
@@ -168,13 +194,6 @@
             /**
              *
              */
-            showDropdown: function () {
-                this.dropdown = true;
-            },
-
-            /**
-             *
-             */
 //            updateScrollbar: function () {
 //                var dropdown = $(this.$el).find('.scrollbar-container');
 //                // dropdown.scrollTop(0).perfectScrollbar('update');
@@ -195,20 +214,6 @@
                         this.currentIndex = 0;
                     }.bind(this)
                 });
-            },
-
-            /**
-             *
-             */
-            respondToEnter: function () {
-                if (this.dropdown) {
-                    //enter is for the autocomplete
-                    this.selectOption();
-                }
-                else {
-                    //enter is to add the entry
-                    this.functionOnEnter();
-                }
             },
 
             /**
