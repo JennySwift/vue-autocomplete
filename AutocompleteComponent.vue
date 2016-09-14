@@ -16,7 +16,7 @@
         </div>
 
         <div
-            v-show="showDropdown"
+            v-show="dropdown"
             transition="fade"
             class="autocomplete-dropdown scrollbar-container"
         >
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-    var $ = require('jquery');
+//    var $ = require('jquery');
     var helpers = require('./helpers');
 
     module.exports = {
@@ -52,7 +52,7 @@
             return {
                 autocompleteOptions: [],
                 chosenOption: this.resetChosenOption(),
-                showDropdown: false,
+                dropdown: false,
                 currentIndex: 0,
                 timeSinceKeyPress: 0,
                 interval: '',
@@ -137,7 +137,7 @@
              *
              */
             hideDropdown: function () {
-                this.showDropdown = false;
+                this.dropdown = false;
             },
 
             /**
@@ -160,7 +160,7 @@
                 this.autocompleteOptions = this.unfilteredAutocompleteOptions.filter(function (option) {
                     return option[that.prop].toLowerCase().indexOf(that.chosenOption[that.prop].toLowerCase()) !== -1;
                 });
-                this.showDropdown = true;
+                this.showDropdown();
 //                this.updateScrollbar();
                 this.currentIndex = 0;
             },
@@ -168,11 +168,18 @@
             /**
              *
              */
-            updateScrollbar: function () {
-                var dropdown = $(this.$el).find('.scrollbar-container');
-                // dropdown.scrollTop(0).perfectScrollbar('update');
-                dropdown.mCustomScrollbar("scrollTo","top");
+            showDropdown: function () {
+                this.dropdown = true;
             },
+
+            /**
+             *
+             */
+//            updateScrollbar: function () {
+//                var dropdown = $(this.$el).find('.scrollbar-container');
+//                // dropdown.scrollTop(0).perfectScrollbar('update');
+//                dropdown.mCustomScrollbar("scrollTo","top");
+//            },
 
             /**
              *
@@ -182,7 +189,7 @@
                     url: this.url + '?filter=' + this.chosenOption[this.prop],
                     callback: function (response) {
                         this.autocompleteOptions = response;
-                        this.showDropdown = true;
+                        this.showDropdown();
 //                        this.updateScrollbar();
 
                         this.currentIndex = 0;
@@ -194,7 +201,7 @@
              *
              */
             respondToEnter: function () {
-                if (this.showDropdown) {
+                if (this.dropdown) {
                     //enter is for the autocomplete
                     this.selectOption();
                 }
@@ -214,11 +221,11 @@
                     this.currentIndex = index;
                 }
                 this.chosenOption = helpers.clone(this.autocompleteOptions[this.currentIndex]);
-                this.showDropdown = false;
+                this.hideDropdown();
                 if (this.idToFocusAfterAutocomplete) {
                     var that = this;
                     setTimeout(function () {
-                        $("#" + that.idToFocusAfterAutocomplete).focus();
+//                        $("#" + that.idToFocusAfterAutocomplete).focus();
                     }, 100);
                 }
                 this.$dispatch('option-chosen', this.chosenOption);

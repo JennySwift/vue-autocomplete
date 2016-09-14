@@ -9,4 +9,10 @@ describe('autocomplete component', function () {
     beforeEach(function () {
         vm = new Vue(require('../AutocompleteComponent.vue'));
     });
+
+    it('can show the dropdown', function () {
+        assert.isFalse(vm.dropdown);
+        vm.showDropdown();
+        assert.isTrue(vm.dropdown);
+    })
 });
