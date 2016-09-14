@@ -25,3 +25,10 @@
         }
     };
 </script>
+
+<style lang="sass" rel="stylesheet/scss">
+    .main {
+        width: 50%;
+        margin: auto;
+    }
+</style>

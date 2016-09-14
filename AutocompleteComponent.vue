@@ -11,7 +11,7 @@
                 :id="autocompleteFieldId"
                 :name="autocompleteFieldId"
                 :placeholder="inputPlaceholder"
-                class="form-control"
+                class="form-control autocomplete-input"
             >
         </div>
 
@@ -259,6 +259,7 @@
 
 <style lang="sass" rel="stylesheet/scss">
     $zIndex1: 9;
+    $selected: #5cb85c;
 
     .autocomplete {
         margin-bottom: 20px;
@@ -286,6 +287,9 @@
                 .label {
                     margin-top: 1px;
                     margin-right: 4px;
+                }
+                &.selected {
+                    background: $selected;
                 }
             }
             .no-results {
