@@ -21,7 +21,7 @@ describe('autocomplete component', function () {
             {name: 'three'}
         ];
 
-        vm.autocompleteOptions = [];
+        vm.options = [];
 
         vm.prop = 'name';
         // vm.chosenOption = {name: 't'};
@@ -48,7 +48,7 @@ describe('autocomplete component', function () {
         vm = new Vue(require('../AutocompleteComponent.vue'));
 
         beforeEach(function () {
-            vm.autocompleteOptions = options;
+            vm.options = options;
         });
 
         it('can increase the currentIndex', function () {
@@ -88,7 +88,7 @@ describe('autocomplete component', function () {
 
     describe('choosing an option', function () {
         beforeEach(function () {
-            vm.autocompleteOptions = options;
+            vm.options = options;
         });
 
         it('can choose an option by clicking on it', function () {
@@ -114,7 +114,7 @@ describe('autocomplete component', function () {
             vm.prop = undefined;
             assert.isUndefined(vm.selected);
             assert.isUndefined(vm.prop);
-            vm.autocompleteOptions = ['one', 'two', 'three'];
+            vm.options = ['one', 'two', 'three'];
             vm.currentIndex = 0;
             assert.equal(0, vm.currentIndex);
 
@@ -138,7 +138,7 @@ describe('autocomplete component', function () {
 
     describe('populating the options', function () {
         it('can filter the options from local data', function () {
-            assert.deepEqual([], vm.autocompleteOptions);
+            assert.deepEqual([], vm.options);
             var result = vm.filterLocalOptions();
             assert.deepEqual([
                 {name: 'two'},
@@ -149,26 +149,26 @@ describe('autocomplete component', function () {
         it('can filter the options when the options are strings and not objects', function () {
             vm.prop = undefined;
             assert.isUndefined(vm.prop);
-            assert.deepEqual([], vm.autocompleteOptions);
+            assert.deepEqual([], vm.options);
             vm.unfilteredOptions = ['one', 'two', 'three'];
             var result = vm.filterLocalOptions();
             assert.deepEqual(['two', 'three'], result);
         });
 
         it('can set the options', function () {
-            assert.deepEqual([], vm.autocompleteOptions);
+            assert.deepEqual([], vm.options);
             vm.setOptions(options);
-            assert.deepEqual(options, vm.autocompleteOptions);
+            assert.deepEqual(options, vm.options);
         });
 
         it('can show the options when the input is focused in the options are local', function () {
             vm.clearInputValue();
 
-            assert.deepEqual([], vm.autocompleteOptions);
+            assert.deepEqual([], vm.options);
 
             vm.respondToFocus();
             
-            assert.deepEqual(options, vm.autocompleteOptions);
+            assert.deepEqual(options, vm.options);
         });
     });
 

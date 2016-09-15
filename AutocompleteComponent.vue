@@ -26,8 +26,8 @@
             class="autocomplete-dropdown scrollbar-container"
         >
             <div
-                v-for="option in autocompleteOptions"
-                v-show="autocompleteOptions.length > 0"
+                v-for="option in options"
+                v-show="options.length > 0"
                 v-bind:class="{'selected': currentIndex === $index}"
                 v-on:mouseover="hoverItem($index)"
                 v-on:mousedown="selectOption($index)"
@@ -38,7 +38,7 @@
 
                 <partial :name="optionPartial"></partial>
             </div>
-            <div v-if="autocompleteOptions.length === 0" class="no-results">No results</div>
+            <div v-if="options.length === 0" class="no-results">No results</div>
         </div>
 
         <pre>Selected: {{selected | json}}</pre>
@@ -55,7 +55,7 @@
         template: '#autocomplete-template',
         data: function () {
             return {
-                autocompleteOptions: [],
+                options: [],
 //                chosenOption: this.resetChosenOption(),
                 dropdown: false,
                 currentIndex: 0,
@@ -99,7 +99,7 @@
              *
              */
             downArrow: function () {
-                if (this.autocompleteOptions.length - 1 !== this.currentIndex) {
+                if (this.options.length - 1 !== this.currentIndex) {
                     this.currentIndex++;
                 }
             },
@@ -121,7 +121,7 @@
                     //Item was chosen by clicking
                     this.currentIndex = index;
                 }
-                this.selected = helpers.clone(this.autocompleteOptions[this.currentIndex]);
+                this.selected = helpers.clone(this.options[this.currentIndex]);
                 this.setInputValue();
                 this.hideDropdown();
                 this.focusNextField();
@@ -180,7 +180,7 @@
              *
              */
             setOptions: function (data) {
-                this.autocompleteOptions = data;
+                this.options = data;
                 this.showDropdown();
             },
 
