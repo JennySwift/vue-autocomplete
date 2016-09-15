@@ -16,7 +16,7 @@
                 :placeholder="inputPlaceholder"
                 class="form-control autocomplete-input"
             >
-            <span v-bind:class="{'dropdown-visible': dropdown}" class="fa fa-caret-down"></span>
+            <span v-bind:class="{'dropdown-visible': dropdown}" v-on:mousedown="toggleDropdown()" class="fa fa-caret-down"></span>
         </div>
 
         <div
@@ -241,6 +241,18 @@
                         clearInterval(that.interval);
                     }
                 }, 500);
+            },
+
+            /**
+             * For when the arrow is clicked
+             */
+            toggleDropdown: function () {
+                if (this.dropdown) {
+                    this.respondToBlur();
+                }
+                else {
+                    this.respondToFocus();
+                }
             },
 
             /**
