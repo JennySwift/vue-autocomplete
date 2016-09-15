@@ -13,6 +13,19 @@
 
     <pre>Selected: {{$data.selected.object | json}}</pre>
 
+    <h2>Options with labels</h2>
+    <autocomplete
+        input-id="my-autocomplete"
+        prop="name"
+        :unfiltered-options="options.withLabels"
+        label-for-option="Assigned"
+        :function-on-enter=""
+        :selected.sync="selected.withLabel"
+    >
+    </autocomplete>
+
+    <pre>Selected: {{$data.selected.withLabel | json}}</pre>
+
     <h2>Options are strings</h2>
     <autocomplete
         input-id="my-autocomplete"
@@ -32,6 +45,7 @@
             return {
                 selected: {
                     object: {name: 'two'},
+                    withLabel: {name: 'two', label: 'Assigned', assignedAlready: false},
                     string: 'two'
                 },
                 options: {
@@ -39,6 +53,11 @@
                         {name: 'one'},
                         {name: 'two'},
                         {name: 'three'}
+                    ],
+                    withLabels: [
+                        {name: 'one', assignedAlready: true},
+                        {name: 'two', assignedAlready: false},
+                        {name: 'three', assignedAlready: true}
                     ],
                     strings: ['one', 'two', 'three']
                 }
