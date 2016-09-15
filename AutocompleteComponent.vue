@@ -190,19 +190,19 @@
 
 
             /**
-             *
+             * Respond to keyup if the key is a character
              * @param keycode
              */
             respondToKeyup: function (keycode) {
-                if (helpers.keyIsCharacter(keycode)) {
-                    if (!this.unfilteredOptions) {
-                        //We'll be searching the database, so create a delay before searching
-                        this.startCounting();
-                    }
-                    else {
-                        //Options are local, not in the database
-                        this.setOptions(this.filterLocalOptions());
-                    }
+                if (!helpers.keyIsCharacter(keycode)) return false;
+
+                if (!this.unfilteredOptions) {
+                    //We'll be searching the database, so create a delay before searching
+                    this.startCounting();
+                }
+                else {
+                    //Options are local, not in the database
+                    this.setOptions(this.filterLocalOptions());
                 }
             },
 

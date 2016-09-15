@@ -119,10 +119,6 @@ describe('autocomplete component', function () {
     });
 
     describe('populating the options', function () {
-        // beforeEach(function () {
-        //     vm.autocompleteOptions = [];
-        // });
-
         it('can filter the options from local data', function () {
             assert.deepEqual([], vm.autocompleteOptions);
             var result = vm.filterLocalOptions();
@@ -135,6 +131,21 @@ describe('autocomplete component', function () {
         it('can set the options', function () {
             assert.deepEqual([], vm.autocompleteOptions);
             vm.setOptions(options);
+            assert.deepEqual(options, vm.autocompleteOptions);
+        });
+
+        it('can show the options when the input is focused in the options are local', function () {
+            vm.chosenOption = vm.resetChosenOption();
+
+            assert.deepEqual({
+                title: '',
+                name: ''
+            }, vm.chosenOption);
+
+            assert.deepEqual([], vm.autocompleteOptions);
+
+            vm.respondToFocus();
+            
             assert.deepEqual(options, vm.autocompleteOptions);
         });
     });
