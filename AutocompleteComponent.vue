@@ -376,6 +376,7 @@
                 cursor: pointer;
                 color: #777;
                 transition: transform .5s ease;
+                z-index: $zIndex1;
                 &.dropdown-visible {
                     transform: rotate(180deg);
                 }
