@@ -21,7 +21,7 @@
 
         <div
             v-show="dropdown"
-            transition="fade"
+            :transition="dropdownTransition"
             class="autocomplete-dropdown scrollbar-container"
         >
             <div
