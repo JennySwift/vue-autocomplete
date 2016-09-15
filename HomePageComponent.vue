@@ -7,8 +7,11 @@
         prop="name"
         :function-on-enter=""
         input-placeholder="some placeholder"
+        :model.sync="selected"
     >
     </autocomplete>
+
+    <pre>{{$data.selected | json}}</pre>
 
 </template>
 
@@ -16,6 +19,7 @@
     module.exports = {
         data: function () {
             return {
+                selected: {name: 'two'},
                 options: [
                     {name: 'one'},
                     {name: 'two'},

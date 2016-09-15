@@ -16,6 +16,7 @@
                 :placeholder="inputPlaceholder"
                 class="form-control autocomplete-input"
             >
+            <div>{{model[prop]}}</div>
         </div>
 
         <div
@@ -265,7 +266,8 @@
             //Property of the chosen option to display in input field once option is chosen
             'prop',
             'labelForOption',
-            'inputPlaceholder'
+            'inputPlaceholder',
+            'model'
         ],
         events: {
             'clear-autocomplete-field': function () {
