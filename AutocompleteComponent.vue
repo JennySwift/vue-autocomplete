@@ -16,6 +16,7 @@
                 :placeholder="inputPlaceholder"
                 class="form-control autocomplete-input"
             >
+            <span v-bind:class="{'dropdown-visible': dropdown}" class="fa fa-caret-down"></span>
         </div>
 
         <div
@@ -342,6 +343,22 @@
         position: relative;
         .autocomplete-field {
             margin-bottom: 0px;
+            position: relative;
+            .fa-caret-down {
+                position: absolute;
+                right: 10px;
+                top: 7px;
+                font-size: 20px;
+                cursor: pointer;
+                transition: transform .5s ease;
+                &.dropdown-visible {
+                    transform: rotate(180deg);
+                }
+            }
+            input {
+                //To allow room for the arrow
+                padding-right: 27px;
+            }
         }
         .autocomplete-dropdown {
             margin-top: 2px;
