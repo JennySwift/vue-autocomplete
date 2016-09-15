@@ -4,20 +4,21 @@ var Vue = require('vue');
 
 
 describe('autocomplete component', function () {
-    var vm = new Vue(require('../AutocompleteComponent.vue'));
+    var vm;
 
     //Todo: test respondToEnter method
-    
-    // beforeEach(function () {
-    //     vm = new Vue(require('../AutocompleteComponent.vue'));
-    // });
 
     beforeEach(function () {
+        vm =  = new Vue(require('../AutocompleteComponent.vue'));
+
         vm.unfilteredAutocompleteOptions = [
             {name: 'one'},
             {name: 'two'},
             {name: 'three'}
         ];
+
+        vm.prop = 'name';
+        vm.chosenOption = {name: 't'};
     });
 
     describe('dropdown visibility', function () {
@@ -97,7 +98,7 @@ describe('autocomplete component', function () {
 
     describe('chosen option', function () {
         it('can reset the chosen option', function () {
-            assert.deepEqual({name: 'two'}, vm.chosenOption);
+            assert.deepEqual({name: 't'}, vm.chosenOption);
             vm.chosenOption = vm.resetChosenOption();
             assert.deepEqual({
                 title: '',
@@ -107,9 +108,8 @@ describe('autocomplete component', function () {
     });
 
     describe('populating the options', function () {
-        beforeEach(function () {
-            vm.prop = 'name';
-            vm.chosenOption = {name: 't'};
+        it('can set the options', function () {
+            console.log(vm.autocompleteOptions);
         });
 
         it('can populate the options from local data', function () {
