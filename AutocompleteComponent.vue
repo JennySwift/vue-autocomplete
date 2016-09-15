@@ -107,6 +107,22 @@
 
             /**
              *
+             * @param index
+             */
+            selectOption: function (index) {
+                if (index) {
+                    //Item was chosen by clicking
+                    this.currentIndex = index;
+                }
+                this.chosenOption = helpers.clone(this.autocompleteOptions[this.currentIndex]);
+                this.hideDropdown();
+                this.focusNextField();
+                this.$dispatch('option-chosen', this.chosenOption);
+            },
+
+
+            /**
+             *
              */
             respondToEnter: function () {
                 if (this.dropdown) {
@@ -222,21 +238,6 @@
                         this.currentIndex = 0;
                     }.bind(this)
                 });
-            },
-
-            /**
-             *
-             * @param index
-             */
-            selectOption: function (index) {
-                if (index) {
-                    //Item was chosen by clicking
-                    this.currentIndex = index;
-                }
-                this.chosenOption = helpers.clone(this.autocompleteOptions[this.currentIndex]);
-                this.hideDropdown();
-                this.focusNextField();
-                this.$dispatch('option-chosen', this.chosenOption);
             },
 
             /**

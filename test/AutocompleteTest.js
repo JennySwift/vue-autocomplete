@@ -72,5 +72,23 @@ describe('autocomplete component', function () {
         });
     });
 
+    describe('choosing an option', function () {
+        it('can choose an option by clicking on it', function () {
+            vm.currentIndex = 0;
+            assert.equal(0, vm.currentIndex);
+            vm.selectOption(2);
+            assert.equal(2, vm.currentIndex);
+        });
+
+        it('can choose the selected option', function () {
+            vm.currentIndex = 1;
+            assert.equal(1, vm.currentIndex);
+            vm.selectOption();
+            assert.deepEqual({name: 'two'}, vm.chosenOption);
+            assert.isFalse(vm.dropdown);
+            //Todo: test next field is focused and event is dispatched
+        });
+    });
+
 
 });
