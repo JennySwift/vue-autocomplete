@@ -8,7 +8,6 @@ Vue.use(VueResource);
 Vue.component('home-page', require('./HomePageComponent.vue'));
 Vue.component('autocomplete', require('./AutocompleteComponent.vue'));
 
-
 new Vue({
     el: 'body'
 });

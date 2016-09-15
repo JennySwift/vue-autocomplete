@@ -3,7 +3,7 @@
 
     <autocomplete
         autocomplete-field-id="my-autocomplete"
-        :unfiltered-autocomplete-options="options"
+        :unfiltered-options="options"
         prop="name"
         :function-on-enter=""
         input-placeholder="some placeholder"

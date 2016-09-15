@@ -190,7 +190,31 @@
                 });
             },
 
-
+            /**
+             * Return false if key is not:
+             * enter (13)
+             * up (38)
+             * down (40)
+             * right arrow (39)
+             * left arrow (37)
+             * escape (27)
+             * shift (16)
+             * option (18)
+             * control (17)
+             * caps lock (20)
+             */
+            keyIsCharacter: function (keycode) {
+                return keycode !== 13
+                    && keycode !== 38
+                    && keycode !== 40
+                    && keycode !== 39
+                    && keycode !== 37
+                    && keycode !== 27
+                    && keycode !== 16
+                    && keycode !== 18
+                    && keycode !== 17
+                    && keycode !== 20;
+            },
 
 
 
@@ -208,8 +232,7 @@
              * @param keycode
              */
             respondToKeyup: function (keycode) {
-                if (keycode !== 13 && keycode !== 38 && keycode !== 40 && keycode !== 39 && keycode !== 37) {
-                    //not enter, up, down, right or left arrows
+                if (this.keyIsCharacter(keycode)) {
                     if (!this.unfilteredOptions) {
                         //We'll be searching the database, so create a delay before searching
                         this.startCounting();
