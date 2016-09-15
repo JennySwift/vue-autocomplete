@@ -374,10 +374,11 @@
             position: relative;
             .fa-caret-down {
                 position: absolute;
-                right: 10px;
-                top: 7px;
+                right: 13px;
+                top: 8px;
                 font-size: 20px;
                 cursor: pointer;
+                color: #777;
                 transition: transform .5s ease;
                 &.dropdown-visible {
                     transform: rotate(180deg);
