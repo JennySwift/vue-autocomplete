@@ -34,11 +34,13 @@
                 <div v-if="prop">{{ option[prop] }}</div>
                 <div v-if="!prop">{{ option }}</div>
 
+                <partial name="my-partial"></partial>
+
                 <!--Labels for option-->
-                <span v-if="option.assignedAlready && labelForOption" class="label label-default">
-                        Assigned
-                </span>
-                <span v-if="!option.assignedAlready && labelForOption" class="label label-danger">Unassigned</span>
+                <!--<span v-if="option.assignedAlready && labelForOption" class="label label-default">-->
+                        <!--Assigned-->
+                <!--</span>-->
+                <!--<span v-if="!option.assignedAlready && labelForOption" class="label label-danger">Unassigned</span>-->
 
             </div>
             <div v-if="autocompleteOptions.length === 0" class="no-results">No results</div>

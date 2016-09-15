@@ -26,6 +26,20 @@
 
     <pre>Selected: {{$data.selected.withLabel | json}}</pre>
 
+    <h2>Options with partial</h2>
+    <autocomplete
+        input-id="my-autocomplete"
+        prop="name"
+        :unfiltered-options="options.withLabels"
+        label-for-option="Assigned"
+        option-partial="optionPartial"
+        :function-on-enter=""
+        :selected.sync="selected.withLabel"
+    >
+    </autocomplete>
+
+    <pre>Selected: {{$data.selected.withLabel | json}}</pre>
+
     <h2>Options are strings</h2>
     <autocomplete
         input-id="my-autocomplete"
@@ -40,6 +54,9 @@
 </template>
 
 <script>
+    var Vue = require('vue');
+    Vue.partial('my-partial', '<p>This is a partial! {{msg}}</p>')
+
     module.exports = {
         data: function () {
             return {
