@@ -145,16 +145,12 @@
                     this.functionOnEnter();
                 }
             },
-
-
-
-
-
+            
             /**
              *
              */
             populateOptions: function () {
-                if (!this.unfilteredAutocompleteOptions) {
+                if (!this.unfilteredOptions) {
                     this.populateOptionsFromDatabase();
                 }
                 else {
@@ -167,7 +163,7 @@
              */
             populateOptionsFromLocal: function () {
                 var that = this;
-                var options = this.unfilteredAutocompleteOptions.filter(function (option) {
+                var options = this.unfilteredOptions.filter(function (option) {
                     return option[that.prop].toLowerCase().indexOf(that.chosenOption[that.prop].toLowerCase()) !== -1;
                 });
 
@@ -214,7 +210,7 @@
             respondToKeyup: function (keycode) {
                 if (keycode !== 13 && keycode !== 38 && keycode !== 40 && keycode !== 39 && keycode !== 37) {
                     //not enter, up, down, right or left arrows
-                    if (!this.unfilteredAutocompleteOptions) {
+                    if (!this.unfilteredOptions) {
                         //We'll be searching the database, so create a delay before searching
                         this.startCounting();
                     }
@@ -246,7 +242,7 @@
              * Show all the options if the options are local
              */
             respondToFocus: function () {
-                if (this.unfilteredAutocompleteOptions) {
+                if (this.unfilteredOptions) {
                     this.populateOptionsFromLocal();
                 }
             },
@@ -279,7 +275,7 @@
             'functionOnEnter',
             'idToFocusAfterAutocomplete',
             //For if items are local
-            'unfilteredAutocompleteOptions',
+            'unfilteredOptions',
             //Property of the chosen option to display in input field once option is chosen
             'prop',
             'labelForOption',

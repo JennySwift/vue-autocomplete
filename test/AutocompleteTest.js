@@ -11,12 +11,10 @@ describe('autocomplete component', function () {
         {name: 'three'}
     ];
 
-    //Todo: test respondToEnter method
-
     beforeEach(function () {
         vm = new Vue(require('../AutocompleteComponent.vue'));
 
-        vm.unfilteredAutocompleteOptions = [
+        vm.unfilteredOptions = [
             {name: 'one'},
             {name: 'two'},
             {name: 'three'}
@@ -124,7 +122,6 @@ describe('autocomplete component', function () {
             assert.deepEqual([], vm.autocompleteOptions);
             vm.setOptions(options);
             assert.deepEqual(options, vm.autocompleteOptions);
-            // console.log('argh' + vm.autocompleteOptions);
         });
 
         it('can populate the options from local data', function () {
