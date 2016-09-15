@@ -1,16 +1,28 @@
 <template>
     <h1>Autocomplete</h1>
 
+    <h2>Options are objects</h2>
     <autocomplete
         input-id="my-autocomplete"
         prop="name"
-        :unfiltered-options="options"
+        :unfiltered-options="options.objects"
         :function-on-enter=""
-        :selected.sync="selected"
+        :selected.sync="selected.object"
     >
     </autocomplete>
 
-    <pre>Selected: {{$data.selected | json}}</pre>
+    <pre>Selected: {{$data.selected.object | json}}</pre>
+
+    <h2>Options are strings</h2>
+    <autocomplete
+        input-id="my-autocomplete"
+        :unfiltered-options="options.strings"
+        :function-on-enter=""
+        :selected.sync="selected.string"
+    >
+    </autocomplete>
+
+    <pre>Selected: {{$data.selected.string | json}}</pre>
 
 </template>
 
@@ -18,17 +30,18 @@
     module.exports = {
         data: function () {
             return {
-                //To test with objects (add prop="name" to component instance)
-                selected: {name: 'two'},
-                options: [
-                    {name: 'one'},
-                    {name: 'two'},
-                    {name: 'three'}
-                ]
-
-                //To test with strings (remove the 'prop' attribute)
-//                selected: 'two',
-//                options: ['one', 'two', 'three']
+                selected: {
+                    object: {name: 'two'},
+                    string: 'two'
+                },
+                options: {
+                    objects: [
+                        {name: 'one'},
+                        {name: 'two'},
+                        {name: 'three'}
+                    ],
+                    strings: ['one', 'two', 'three']
+                }
             }
         }
     };
