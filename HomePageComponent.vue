@@ -4,7 +4,6 @@
     <autocomplete
         autocomplete-field-id="my-autocomplete"
         :unfiltered-options="options"
-        prop="name"
         :function-on-enter=""
         :selected.sync="selected"
     >

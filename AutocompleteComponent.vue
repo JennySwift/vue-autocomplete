@@ -294,7 +294,9 @@
             //For if items are local
             'unfilteredOptions': {},
             //Property of the chosen option to display in input field once option is chosen
-            'prop': {},
+            'prop': {
+                default: 'name'
+            },
             'labelForOption': {},
             'selected': {},
             inputPlaceholder: {
