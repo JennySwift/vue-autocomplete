@@ -40,10 +40,6 @@
             </div>
             <div v-if="options.length === 0" class="no-results">No results</div>
         </div>
-
-        <pre>Selected: {{selected | json}}</pre>
-        <pre>Input value: {{$data.inputValue | json}}</pre>
-        <pre>Prop: {{prop | json}}</pre>
     </div>
 </template>
 
