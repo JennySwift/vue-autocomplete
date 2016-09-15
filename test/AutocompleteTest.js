@@ -25,6 +25,7 @@ describe('autocomplete component', function () {
             assert.isFalse(vm.dropdown);
             vm.showDropdown();
             assert.isTrue(vm.dropdown);
+            assert.equal(0, vm.currentIndex);
         });
 
         it('can hide the dropdown', function () {
