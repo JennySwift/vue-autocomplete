@@ -109,6 +109,20 @@ describe('autocomplete component', function () {
             assert.isFalse(vm.dropdown);
             //Todo: test next field is focused and event is dispatched
         });
+
+        it('can choose an option when the options are strings not objects', function () {
+            vm.prop = undefined;
+            assert.isUndefined(vm.selected);
+            assert.isUndefined(vm.prop);
+            vm.autocompleteOptions = ['one', 'two', 'three'];
+            vm.currentIndex = 0;
+            assert.equal(0, vm.currentIndex);
+
+            vm.selectOption(2);
+            assert.equal(2, vm.currentIndex);
+            assert.equal('three', vm.selected);
+            assert.equal('three', vm.inputValue);
+        });
     });
 
     // describe('chosen option', function () {

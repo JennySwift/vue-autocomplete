@@ -274,7 +274,13 @@
              *
              */
             setInputValue: function () {
-                this.inputValue = this.selected[this.prop];
+                if (this.prop) {
+                    this.inputValue = this.selected[this.prop];
+                }
+                else {
+                    this.inputValue = this.selected;
+                }
+
             },
 
             /**
