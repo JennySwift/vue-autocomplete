@@ -4,7 +4,6 @@
     <h2>Options are objects</h2>
     <autocomplete
         input-id="my-autocomplete"
-        dropdown-transition="fade"
         prop="name"
         :unfiltered-options="options.objects"
         :function-on-enter=""

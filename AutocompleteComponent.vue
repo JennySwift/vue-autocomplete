@@ -328,7 +328,9 @@
             'labelForOption': {},
             'selected': {},
             'optionPartial': {},
-            'dropdownTransition': {},
+            'dropdownTransition': {
+                default: 'fade'
+            },
             inputPlaceholder: {
                 default: 'Choose an option'
             },
