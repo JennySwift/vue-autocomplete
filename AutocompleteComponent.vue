@@ -145,18 +145,6 @@
                     this.functionOnEnter();
                 }
             },
-            
-            /**
-             *
-             */
-            populateOptions: function () {
-                if (!this.unfilteredOptions) {
-                    this.populateOptionsFromDatabase();
-                }
-                else {
-                    this.setOptions(this.filterLocalOptions());
-                }
-            },
 
             /**
              *
@@ -212,7 +200,8 @@
                         this.startCounting();
                     }
                     else {
-                        this.populateOptions();
+                        //Options are local, not in the database
+                        this.setOptions(this.filterLocalOptions());
                     }
                 }
             },
@@ -229,7 +218,7 @@
                 this.interval = setInterval(function () {
                     that.timeSinceKeyPress++;
                     if (that.timeSinceKeyPress > 1) {
-                        that.populateOptions();
+                        that.populateOptionsFromDatabase();
                         clearInterval(that.interval);
                     }
                 }, 500);

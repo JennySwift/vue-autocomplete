@@ -119,20 +119,23 @@ describe('autocomplete component', function () {
     });
 
     describe('populating the options', function () {
+        // beforeEach(function () {
+        //     vm.autocompleteOptions = [];
+        // });
+
+        it('can filter the options from local data', function () {
+            assert.deepEqual([], vm.autocompleteOptions);
+            var result = vm.filterLocalOptions();
+            assert.deepEqual([
+                {name: 'two'},
+                {name: 'three'}
+            ], result);
+        });
+
         it('can set the options', function () {
             assert.deepEqual([], vm.autocompleteOptions);
             vm.setOptions(options);
             assert.deepEqual(options, vm.autocompleteOptions);
-        });
-
-        it('can populate the options from local data', function () {
-            vm.populateOptions();
-            assert.deepEqual([
-                {name: 'two'},
-                {name: 'three'}
-            ], vm.autocompleteOptions);
-            assert.isTrue(vm.dropdown);
-            assert.equal(0, vm.currentIndex);
         });
     });
 });
