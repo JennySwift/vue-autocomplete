@@ -77,6 +77,7 @@
              */
             showDropdown: function () {
                 this.dropdown = true;
+                this.currentIndex = 0;
             },
 
             /**
@@ -145,18 +146,61 @@
                 }
             },
 
+
+
+
+
+            /**
+             *
+             */
+            populateOptions: function () {
+                if (!this.unfilteredAutocompleteOptions) {
+                    this.populateOptionsFromDatabase();
+                }
+                else {
+                    this.populateOptionsFromLocal();
+                }
+            },
+
             /**
              *
              */
             populateOptionsFromLocal: function () {
                 var that = this;
-                this.autocompleteOptions = this.unfilteredAutocompleteOptions.filter(function (option) {
+                var options = this.unfilteredAutocompleteOptions.filter(function (option) {
                     return option[that.prop].toLowerCase().indexOf(that.chosenOption[that.prop].toLowerCase()) !== -1;
                 });
-                this.showDropdown();
-//                this.updateScrollbar();
-                this.currentIndex = 0;
+
+                this.setAutocompleteOptions(options);
             },
+
+            /**
+             *
+             */
+            setAutocompleteOptions: function (data) {
+                this.autocompleteOptions = data;
+                this.showDropdown();
+            },
+
+            /**
+             *
+             */
+            populateOptionsFromDatabase: function () {
+                helpers.get({
+                    url: this.url + '?filter=' + this.chosenOption[this.prop],
+                    callback: function (response) {
+                        this.setAutocompleteOptions(response);
+                    }.bind(this)
+                });
+            },
+
+
+
+
+
+
+
+
 
 
 
@@ -210,39 +254,11 @@
             /**
              *
              */
-            populateOptions: function () {
-                if (!this.unfilteredAutocompleteOptions) {
-                    this.populateOptionsFromDatabase();
-                }
-                else {
-                    this.populateOptionsFromLocal();
-                }
-            },
-
-            /**
-             *
-             */
 //            updateScrollbar: function () {
 //                var dropdown = $(this.$el).find('.scrollbar-container');
 //                // dropdown.scrollTop(0).perfectScrollbar('update');
 //                dropdown.mCustomScrollbar("scrollTo","top");
 //            },
-
-            /**
-             *
-             */
-            populateOptionsFromDatabase: function () {
-                helpers.get({
-                    url: this.url + '?filter=' + this.chosenOption[this.prop],
-                    callback: function (response) {
-                        this.autocompleteOptions = response;
-                        this.showDropdown();
-//                        this.updateScrollbar();
-
-                        this.currentIndex = 0;
-                    }.bind(this)
-                });
-            },
 
             /**
              *
