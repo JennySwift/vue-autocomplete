@@ -285,20 +285,22 @@
                 }
             }
         },
-        props: [
-            'url',
-            'inputLabel',
-            'autocompleteFieldId',
-            'functionOnEnter',
-            'idToFocusAfterAutocomplete',
+        props: {
+            'url': {},
+            'inputLabel': {},
+            'autocompleteFieldId': {},
+            'functionOnEnter': {},
+            'idToFocusAfterAutocomplete': {},
             //For if items are local
-            'unfilteredOptions',
+            'unfilteredOptions': {},
             //Property of the chosen option to display in input field once option is chosen
-            'prop',
-            'labelForOption',
-            'inputPlaceholder',
-            'selected'
-        ],
+            'prop': {},
+            'labelForOption': {},
+            'selected': {},
+            inputPlaceholder: {
+                default: 'Choose an option'
+            },
+        },
         events: {
 //            'clear-autocomplete-field': function () {
 //                this.chosenOption = this.resetChosenOption();
