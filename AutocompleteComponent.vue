@@ -120,6 +120,16 @@
                 this.$dispatch('option-chosen', this.chosenOption);
             },
 
+            /**
+             *
+             * @returns {{title: string, name: string}}
+             */
+            resetChosenOption: function () {
+                return {
+                    title: '',
+                    name: ''
+                }
+            },
 
             /**
              *
@@ -137,14 +147,21 @@
 
             /**
              *
-             * @returns {{title: string, name: string}}
              */
-            resetChosenOption: function () {
-                return {
-                    title: '',
-                    name: ''
-                }
+            populateOptionsFromLocal: function () {
+                var that = this;
+                this.autocompleteOptions = this.unfilteredAutocompleteOptions.filter(function (option) {
+                    return option[that.prop].toLowerCase().indexOf(that.chosenOption[that.prop].toLowerCase()) !== -1;
+                });
+                this.showDropdown();
+//                this.updateScrollbar();
+                this.currentIndex = 0;
             },
+
+
+
+
+
 
             /**
              *
@@ -200,19 +217,6 @@
                 else {
                     this.populateOptionsFromLocal();
                 }
-            },
-
-            /**
-             *
-             */
-            populateOptionsFromLocal: function () {
-                var that = this;
-                this.autocompleteOptions = this.unfilteredAutocompleteOptions.filter(function (option) {
-                    return option[that.prop].toLowerCase().indexOf(that.chosenOption[that.prop].toLowerCase()) !== -1;
-                });
-                this.showDropdown();
-//                this.updateScrollbar();
-                this.currentIndex = 0;
             },
 
             /**
