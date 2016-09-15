@@ -7,6 +7,7 @@
                 v-on:keyup.down="downArrow()"
                 v-on:keyup.up="upArrow()"
                 v-on:keyup.enter="respondToEnter()"
+                v-el:input
                 v-on:keyup="respondToKeyup($event.keyCode)"
                 v-on:focus="respondToFocus()"
                 v-on:blur="respondToBlur()"
@@ -16,7 +17,7 @@
                 :placeholder="inputPlaceholder"
                 class="form-control autocomplete-input"
             >
-            <span v-bind:class="{'dropdown-visible': dropdown}" v-on:mousedown="toggleDropdown()" class="fa fa-caret-down"></span>
+            <span v-bind:class="{'dropdown-visible': dropdown}" v-on:mousedown="respondToArrowClick()" class="fa fa-caret-down"></span>
         </div>
 
         <div
@@ -47,7 +48,7 @@
 </template>
 
 <script>
-//    var $ = require('jquery');
+    var $ = require('jquery');
     var helpers = require('./helpers');
 
     module.exports = {
@@ -246,12 +247,24 @@
             /**
              * For when the arrow is clicked
              */
-            toggleDropdown: function () {
-                if (this.dropdown) {
-                    this.respondToBlur();
-                }
-                else {
-                    this.respondToFocus();
+//            toggleDropdown: function () {
+//                if (this.dropdown) {
+//                    this.respondToBlur();
+//                }
+//                else {
+//                    this.respondToFocus();
+//                }
+//            },
+
+            /**
+             *
+             */
+            respondToArrowClick: function () {
+                if(!this.dropdown) {
+                    var that = this;
+                    setTimeout(function () {
+                        $(that.$els.input).focus();
+                    }, 100);
                 }
             },
 
