@@ -34,14 +34,7 @@
                 <div v-if="prop">{{ option[prop] }}</div>
                 <div v-if="!prop">{{ option }}</div>
 
-                <partial name="my-partial"></partial>
-
-                <!--Labels for option-->
-                <!--<span v-if="option.assignedAlready && labelForOption" class="label label-default">-->
-                        <!--Assigned-->
-                <!--</span>-->
-                <!--<span v-if="!option.assignedAlready && labelForOption" class="label label-danger">Unassigned</span>-->
-
+                <partial :name="optionPartial"></partial>
             </div>
             <div v-if="autocompleteOptions.length === 0" class="no-results">No results</div>
         </div>
@@ -321,6 +314,7 @@
             'prop': {},
             'labelForOption': {},
             'selected': {},
+            'optionPartial': {},
             inputPlaceholder: {
                 default: 'Choose an option'
             },

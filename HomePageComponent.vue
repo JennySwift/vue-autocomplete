@@ -31,8 +31,7 @@
         input-id="my-autocomplete"
         prop="name"
         :unfiltered-options="options.withLabels"
-        label-for-option="Assigned"
-        option-partial="optionPartial"
+        option-partial="partial-three"
         :function-on-enter=""
         :selected.sync="selected.withLabel"
     >
@@ -55,7 +54,9 @@
 
 <script>
     var Vue = require('vue');
-    Vue.partial('my-partial', '<p>This is a partial! {{msg}}</p>')
+    Vue.partial('my-partial', '<p>This is a partial! {{msg}}</p>');
+    Vue.partial('partial-two', '<p>Partial two</p>');
+    Vue.partial('partial-three', '<span v-if="option.assignedAlready" class="label label-default">Assigned</span><span v-if="!option.assignedAlready" class="label label-danger">Unassigned</span>');
 
     module.exports = {
         data: function () {
