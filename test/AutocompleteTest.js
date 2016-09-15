@@ -92,10 +92,13 @@ describe('autocomplete component', function () {
         });
 
         it('can choose an option by clicking on it', function () {
+            assert.isUndefined(vm.selected);
             vm.currentIndex = 0;
             assert.equal(0, vm.currentIndex);
             vm.selectOption(2);
             assert.equal(2, vm.currentIndex);
+            assert.deepEqual({name: 'three'}, vm.selected);
+            assert.equal('three', vm.inputValue);
         });
 
         it('can choose the selected option', function () {
@@ -165,6 +168,15 @@ describe('autocomplete component', function () {
             vm.clearInputValue();
             assert.equal('', vm.inputValue);
             vm.setInputValue();
+            assert.equal('two', vm.inputValue);
+        });
+
+        it('can respond to the input blur', function () {
+            vm.selected = {name: 'two'};
+            vm.dropdown = true;
+            assert.isTrue(vm.dropdown);
+            vm.respondToBlur();
+            assert.isFalse(vm.dropdown);
             assert.equal('two', vm.inputValue);
         });
     });

@@ -133,12 +133,12 @@
              *
              * @returns {{title: string, name: string}}
              */
-            resetChosenOption: function () {
-                return {
-                    title: '',
-                    name: ''
-                }
-            },
+//            resetChosenOption: function () {
+//                return {
+//                    title: '',
+//                    name: ''
+//                }
+//            },
 
             /**
              *
