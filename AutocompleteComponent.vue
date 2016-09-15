@@ -160,8 +160,21 @@
             filterLocalOptions: function () {
                 var that = this;
                 return this.unfilteredOptions.filter(function (option) {
-                    return option[that.prop].toLowerCase().indexOf(that.inputValue.toLowerCase()) !== -1;
+                    var string = that.getString(option);
+                    return string.toLowerCase().indexOf(that.inputValue.toLowerCase()) !== -1;
                 });
+            },
+
+            /**
+             * If the option is an object, get the property.
+             * If the option is a string, get the string.
+             */
+            getString: function (option) {
+                if (this.prop) {
+                    return option[this.prop];
+                }
+                console.log(option);
+                return option;
             },
 
             /**

@@ -132,6 +132,15 @@ describe('autocomplete component', function () {
             ], result);
         });
 
+        it('can filter the options when the options are strings and not objects', function () {
+            vm.prop = undefined;
+            assert.isUndefined(vm.prop);
+            assert.deepEqual([], vm.autocompleteOptions);
+            vm.unfilteredOptions = ['one', 'two', 'three'];
+            var result = vm.filterLocalOptions();
+            assert.deepEqual(['two', 'three'], result);
+        });
+
         it('can set the options', function () {
             assert.deepEqual([], vm.autocompleteOptions);
             vm.setOptions(options);
@@ -139,19 +148,26 @@ describe('autocomplete component', function () {
         });
 
         it('can show the options when the input is focused in the options are local', function () {
-            // vm.chosenOption = vm.resetChosenOption();
             vm.clearInputValue();
-
-            // assert.deepEqual({
-            //     title: '',
-            //     name: ''
-            // }, vm.chosenOption);
 
             assert.deepEqual([], vm.autocompleteOptions);
 
             vm.respondToFocus();
             
             assert.deepEqual(options, vm.autocompleteOptions);
+        });
+    });
+
+    describe('strings', function () {
+        it('can get the option property if the option is an object', function () {
+            var result = vm.getString({name: 'three'});
+            assert.equal('three', result);
+        });
+
+        it('can get the string if the option is a string', function () {
+            vm.prop = undefined;
+            var result = vm.getString('four');
+            assert.equal('four', result);
         });
     });
 
