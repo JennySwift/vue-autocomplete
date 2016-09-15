@@ -1,6 +1,5 @@
 var webpack = require('webpack'),
     path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     //where our application source code lives
@@ -26,8 +25,7 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.IgnorePlugin(/jsdom$/),
-        new HtmlWebpackPlugin()
+        new webpack.IgnorePlugin(/jsdom$/)
         // new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js")
     ],
     devtool: 'eval-source-map',
