@@ -99,6 +99,14 @@
 
             /**
              *
+             * @param index
+             */
+            hoverItem: function(index) {
+                this.currentIndex = index;
+            },
+
+            /**
+             *
              */
             respondToEnter: function () {
                 if (this.dropdown) {
@@ -227,22 +235,21 @@
                 }
                 this.chosenOption = helpers.clone(this.autocompleteOptions[this.currentIndex]);
                 this.hideDropdown();
+                this.focusNextField();
+                this.$dispatch('option-chosen', this.chosenOption);
+            },
+
+            /**
+             *
+             */
+            focusNextField: function () {
                 if (this.idToFocusAfterAutocomplete) {
                     var that = this;
                     setTimeout(function () {
 //                        $("#" + that.idToFocusAfterAutocomplete).focus();
                     }, 100);
                 }
-                this.$dispatch('option-chosen', this.chosenOption);
-            },
-
-            /**
-             *
-             * @param index
-             */
-            hoverItem: function(index) {
-                this.currentIndex = index;
-            },
+            }
         },
         props: [
             'url',

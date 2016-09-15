@@ -31,6 +31,8 @@ describe('autocomplete component', function () {
     });
     
     describe('currentIndex', function () {
+        vm = new Vue(require('../AutocompleteComponent.vue'));
+
         vm.autocompleteOptions = [
             {name: 'one'},
             {name: 'two'},
@@ -61,6 +63,12 @@ describe('autocomplete component', function () {
             assert.equal(0, vm.currentIndex);
             vm.upArrow();
             assert.equal(0, vm.currentIndex);
+        });
+
+        it('can set the currentIndex by hovering over the option', function () {
+            assert.equal(0, vm.currentIndex);
+            vm.hoverItem(2);
+            assert.equal(2, vm.currentIndex);
         });
     });
 
