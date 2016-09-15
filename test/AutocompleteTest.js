@@ -1,4 +1,3 @@
-var expect = require('chai').expect;
 var assert = require('chai').assert;
 var Vue = require('vue');
 
@@ -6,16 +5,24 @@ var Vue = require('vue');
 describe('autocomplete component', function () {
     var vm;
 
+    var options = [
+        {name: 'one'},
+        {name: 'two'},
+        {name: 'three'}
+    ];
+
     //Todo: test respondToEnter method
 
     beforeEach(function () {
-        vm =  = new Vue(require('../AutocompleteComponent.vue'));
+        vm = new Vue(require('../AutocompleteComponent.vue'));
 
         vm.unfilteredAutocompleteOptions = [
             {name: 'one'},
             {name: 'two'},
             {name: 'three'}
         ];
+
+        vm.autocompleteOptions = [];
 
         vm.prop = 'name';
         vm.chosenOption = {name: 't'};
@@ -30,6 +37,7 @@ describe('autocomplete component', function () {
         });
 
         it('can hide the dropdown', function () {
+            vm.dropdown = true;
             assert.isTrue(vm.dropdown);
             vm.hideDropdown();
             assert.isFalse(vm.dropdown);
@@ -39,11 +47,9 @@ describe('autocomplete component', function () {
     describe('currentIndex', function () {
         vm = new Vue(require('../AutocompleteComponent.vue'));
 
-        vm.autocompleteOptions = [
-            {name: 'one'},
-            {name: 'two'},
-            {name: 'three'}
-        ];
+        beforeEach(function () {
+            vm.autocompleteOptions = options;
+        });
 
         it('can increase the currentIndex', function () {
             assert.equal(0, vm.currentIndex);
@@ -59,6 +65,7 @@ describe('autocomplete component', function () {
         });
 
         it('can decrease the currentIndex', function () {
+            vm.currentIndex = 2;
             assert.equal(2, vm.currentIndex);
             vm.upArrow();
             assert.equal(1, vm.currentIndex);
@@ -72,6 +79,7 @@ describe('autocomplete component', function () {
         });
 
         it('can set the currentIndex by hovering over the option', function () {
+            vm.currentIndex = 0;
             assert.equal(0, vm.currentIndex);
             vm.hoverItem(2);
             assert.equal(2, vm.currentIndex);
@@ -79,6 +87,10 @@ describe('autocomplete component', function () {
     });
 
     describe('choosing an option', function () {
+        beforeEach(function () {
+            vm.autocompleteOptions = options;
+        });
+
         it('can choose an option by clicking on it', function () {
             vm.currentIndex = 0;
             assert.equal(0, vm.currentIndex);
@@ -109,7 +121,10 @@ describe('autocomplete component', function () {
 
     describe('populating the options', function () {
         it('can set the options', function () {
-            console.log(vm.autocompleteOptions);
+            assert.deepEqual([], vm.autocompleteOptions);
+            vm.setOptions(options);
+            assert.deepEqual(options, vm.autocompleteOptions);
+            // console.log('argh' + vm.autocompleteOptions);
         });
 
         it('can populate the options from local data', function () {

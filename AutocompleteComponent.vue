@@ -171,13 +171,13 @@
                     return option[that.prop].toLowerCase().indexOf(that.chosenOption[that.prop].toLowerCase()) !== -1;
                 });
 
-                this.setAutocompleteOptions(options);
+                this.setOptions(options);
             },
 
             /**
              *
              */
-            setAutocompleteOptions: function (data) {
+            setOptions: function (data) {
                 this.autocompleteOptions = data;
                 this.showDropdown();
             },
@@ -189,7 +189,7 @@
                 helpers.get({
                     url: this.url + '?filter=' + this.chosenOption[this.prop],
                     callback: function (response) {
-                        this.setAutocompleteOptions(response);
+                        this.setOptions(response);
                     }.bind(this)
                 });
             },
