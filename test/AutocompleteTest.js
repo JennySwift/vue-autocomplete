@@ -24,7 +24,8 @@ describe('autocomplete component', function () {
         vm.autocompleteOptions = [];
 
         vm.prop = 'name';
-        vm.chosenOption = {name: 't'};
+        // vm.chosenOption = {name: 't'};
+        vm.inputValue = 't';
     });
 
     describe('dropdown visibility', function () {
@@ -101,22 +102,22 @@ describe('autocomplete component', function () {
             vm.currentIndex = 1;
             assert.equal(1, vm.currentIndex);
             vm.selectOption();
-            assert.deepEqual({name: 'two'}, vm.chosenOption);
+            assert.deepEqual({name: 'two'}, vm.selected);
             assert.isFalse(vm.dropdown);
             //Todo: test next field is focused and event is dispatched
         });
     });
 
-    describe('chosen option', function () {
-        it('can reset the chosen option', function () {
-            assert.deepEqual({name: 't'}, vm.chosenOption);
-            vm.chosenOption = vm.resetChosenOption();
-            assert.deepEqual({
-                title: '',
-                name: ''
-            }, vm.chosenOption);
-        })
-    });
+    // describe('chosen option', function () {
+    //     it('can reset the chosen option', function () {
+    //         assert.deepEqual({name: 't'}, vm.chosenOption);
+    //         vm.chosenOption = vm.resetChosenOption();
+    //         assert.deepEqual({
+    //             title: '',
+    //             name: ''
+    //         }, vm.chosenOption);
+    //     })
+    // });
 
     describe('populating the options', function () {
         it('can filter the options from local data', function () {
@@ -135,18 +136,28 @@ describe('autocomplete component', function () {
         });
 
         it('can show the options when the input is focused in the options are local', function () {
-            vm.chosenOption = vm.resetChosenOption();
+            // vm.chosenOption = vm.resetChosenOption();
+            vm.clearInputValue();
 
-            assert.deepEqual({
-                title: '',
-                name: ''
-            }, vm.chosenOption);
+            // assert.deepEqual({
+            //     title: '',
+            //     name: ''
+            // }, vm.chosenOption);
 
             assert.deepEqual([], vm.autocompleteOptions);
 
             vm.respondToFocus();
             
             assert.deepEqual(options, vm.autocompleteOptions);
+        });
+    });
+
+    describe('input field', function () {
+        it('can clear the input field', function () {
+            vm.inputValue = 'hi';
+            assert.equal('hi', vm.inputValue);
+            vm.clearInputValue();
+            assert.equal('', vm.inputValue);
         });
     });
 });

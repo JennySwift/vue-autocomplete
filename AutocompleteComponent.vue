@@ -3,20 +3,19 @@
         <div class="form-group autocomplete-field">
             <label v-if="inputLabel" :for="autocompleteFieldId">{{ inputLabel | capitalize }}</label>
             <input
-                v-model="chosenOption[prop]"
+                v-model="inputValue"
                 v-on:keyup.down="downArrow()"
                 v-on:keyup.up="upArrow()"
                 v-on:keyup.enter="respondToEnter()"
                 v-on:keyup="respondToKeyup($event.keyCode)"
                 v-on:focus="respondToFocus()"
-                v-on:blur="hideDropdown()"
+                v-on:blur="respondToBlur()"
                 type="text"
                 :id="autocompleteFieldId"
                 :name="autocompleteFieldId"
                 :placeholder="inputPlaceholder"
                 class="form-control autocomplete-input"
             >
-            <div>{{model[prop]}}</div>
         </div>
 
         <div
@@ -43,6 +42,9 @@
             </div>
             <div v-if="autocompleteOptions.length === 0" class="no-results">No results</div>
         </div>
+
+        <pre>Selected: {{selected[prop] | json}}</pre>
+        <pre>Input value: {{$data.inputValue | json}}</pre>
     </div>
 </template>
 
@@ -55,15 +57,19 @@
         data: function () {
             return {
                 autocompleteOptions: [],
-                chosenOption: this.resetChosenOption(),
+//                chosenOption: this.resetChosenOption(),
                 dropdown: false,
                 currentIndex: 0,
                 timeSinceKeyPress: 0,
                 interval: '',
-                startedCounting: false
+                startedCounting: false,
+                inputValue: ''
             };
         },
         components: {},
+        computed: {
+
+        },
         methods: {
 
             /**
@@ -116,10 +122,11 @@
                     //Item was chosen by clicking
                     this.currentIndex = index;
                 }
-                this.chosenOption = helpers.clone(this.autocompleteOptions[this.currentIndex]);
+                this.selected = helpers.clone(this.autocompleteOptions[this.currentIndex]);
+                this.setInputValue();
                 this.hideDropdown();
                 this.focusNextField();
-                this.$dispatch('option-chosen', this.chosenOption);
+//                this.$dispatch('option-chosen', this.chosenOption);
             },
 
             /**
@@ -153,7 +160,7 @@
             filterLocalOptions: function () {
                 var that = this;
                 return this.unfilteredOptions.filter(function (option) {
-                    return option[that.prop].toLowerCase().indexOf(that.chosenOption[that.prop].toLowerCase()) !== -1;
+                    return option[that.prop].toLowerCase().indexOf(that.inputValue.toLowerCase()) !== -1;
                 });
             },
 
@@ -170,7 +177,7 @@
              */
             populateOptionsFromDatabase: function () {
                 helpers.get({
-                    url: this.url + '?filter=' + this.chosenOption[this.prop],
+                    url: this.url + '?filter=' + this.inputValue,
                     callback: function (response) {
                         this.setOptions(response);
                     }.bind(this)
@@ -229,9 +236,32 @@
              * Show all the options if the options are local
              */
             respondToFocus: function () {
+                this.clearInputValue();
                 if (this.unfilteredOptions) {
                     this.setOptions(this.filterLocalOptions());
                 }
+            },
+
+            /**
+             *
+             */
+            respondToBlur: function () {
+                this.hideDropdown();
+                this.setInputValue();
+            },
+
+            /**
+             *
+             */
+            clearInputValue: function () {
+                this.inputValue = '';
+            },
+
+            /**
+             *
+             */
+            setInputValue: function () {
+                this.inputValue = this.selected[this.prop];
             },
 
             /**
@@ -267,15 +297,17 @@
             'prop',
             'labelForOption',
             'inputPlaceholder',
-            'model'
+            'selected'
         ],
         events: {
-            'clear-autocomplete-field': function () {
-                this.chosenOption = this.resetChosenOption();
-            }
+//            'clear-autocomplete-field': function () {
+//                this.chosenOption = this.resetChosenOption();
+//            }
         },
         ready: function () {
-
+            if (this.selected) {
+                this.setInputValue();
+            }
         }
     };
 

@@ -6,8 +6,8 @@
         :unfiltered-options="options"
         prop="name"
         :function-on-enter=""
-        input-placeholder="some placeholder"
-        :model.sync="selected"
+        input-placeholder="Choose an option"
+        :selected.sync="selected"
     >
     </autocomplete>
 
