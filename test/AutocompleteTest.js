@@ -159,5 +159,13 @@ describe('autocomplete component', function () {
             vm.clearInputValue();
             assert.equal('', vm.inputValue);
         });
+
+        it('can set the input value according to the property of the selected option', function () {
+            vm.selected = {name: 'two'};
+            vm.clearInputValue();
+            assert.equal('', vm.inputValue);
+            vm.setInputValue();
+            assert.equal('two', vm.inputValue);
+        });
     });
 });
