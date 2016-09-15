@@ -2,7 +2,7 @@
     <h1>Autocomplete</h1>
 
     <autocomplete
-        autocomplete-field-id="my-autocomplete"
+        input-id="my-autocomplete"
         :unfiltered-options="options"
         :function-on-enter=""
         :selected.sync="selected"

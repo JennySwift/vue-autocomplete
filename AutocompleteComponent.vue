@@ -1,7 +1,7 @@
 <template>
     <div class="autocomplete">
         <div class="form-group autocomplete-field">
-            <label v-if="inputLabel" :for="autocompleteFieldId">{{ inputLabel | capitalize }}</label>
+            <label v-if="inputLabel" :for="inputId">{{ inputLabel | capitalize }}</label>
             <input
                 v-model="inputValue"
                 v-on:keyup.down="downArrow()"
@@ -11,8 +11,8 @@
                 v-on:focus="respondToFocus()"
                 v-on:blur="respondToBlur()"
                 type="text"
-                :id="autocompleteFieldId"
-                :name="autocompleteFieldId"
+                :id="inputId"
+                :name="inputId"
                 :placeholder="inputPlaceholder"
                 class="form-control autocomplete-input"
             >
@@ -288,7 +288,7 @@
         props: {
             'url': {},
             'inputLabel': {},
-            'autocompleteFieldId': {},
+            'inputId': {},
             'functionOnEnter': {},
             'idToFocusAfterAutocomplete': {},
             //For if items are local
