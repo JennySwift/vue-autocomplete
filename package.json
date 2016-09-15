@@ -1,7 +1,7 @@
 {
-  "name": "autocomplete",
-  "version": "0.0.1",
-  "description": "",
+  "name": "@jennyswift/vue-autocomplete",
+  "version": "0.1.0",
+  "description": "A Vue.js autocomplete component",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -42,5 +42,13 @@
     "vue-style-loader": "^1.0.0",
     "webpack": "^1.13.2",
     "webpack-dev-server": "^1.15.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JennySwift/vue-autocomplete.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JennySwift/vue-autocomplete/issues"
+  },
+  "homepage": "https://github.com/JennySwift/vue-autocomplete#readme"
 }
