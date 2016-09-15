@@ -154,20 +154,18 @@
                     this.populateOptionsFromDatabase();
                 }
                 else {
-                    this.populateOptionsFromLocal();
+                    this.setOptions(this.filterLocalOptions());
                 }
             },
 
             /**
              *
              */
-            populateOptionsFromLocal: function () {
+            filterLocalOptions: function () {
                 var that = this;
-                var options = this.unfilteredOptions.filter(function (option) {
+                return this.unfilteredOptions.filter(function (option) {
                     return option[that.prop].toLowerCase().indexOf(that.chosenOption[that.prop].toLowerCase()) !== -1;
                 });
-
-                this.setOptions(options);
             },
 
             /**
@@ -242,7 +240,7 @@
              */
             respondToFocus: function () {
                 if (this.unfilteredOptions) {
-                    this.populateOptionsFromLocal();
+                    this.setOptions(this.filterLocalOptions());
                 }
             },
 
