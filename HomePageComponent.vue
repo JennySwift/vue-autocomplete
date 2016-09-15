@@ -56,7 +56,7 @@
     var Vue = require('vue');
     Vue.partial('my-partial', '<p>This is a partial! {{msg}}</p>');
     Vue.partial('partial-two', '<p>Partial two</p>');
-    Vue.partial('partial-three', '<span v-if="option.assignedAlready" class="label label-default">Assigned</span><span v-if="!option.assignedAlready" class="label label-danger">Unassigned</span>');
+    Vue.partial('partial-three', require('./partials/partial.html'));
 
     module.exports = {
         data: function () {

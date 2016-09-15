@@ -1,5 +1,6 @@
 var webpack = require('webpack'),
     path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     //where our application source code lives
@@ -25,7 +26,8 @@ module.exports = {
         }
     },
     plugins: [
-        new webpack.IgnorePlugin(/jsdom$/)
+        new webpack.IgnorePlugin(/jsdom$/),
+        new HtmlWebpackPlugin()
         // new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js")
     ],
     devtool: 'eval-source-map',
@@ -47,6 +49,11 @@ module.exports = {
                 // important: exclude files in node_modules
                 // otherwise it's going to be really slow!
                 exclude: /node_modules/
+            },
+            //For my partials
+            {
+                test: /\.html$/,
+                loader: "vue-html"
             }
         ]
     },
