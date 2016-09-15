@@ -201,6 +201,15 @@ describe('autocomplete component', function () {
             assert.equal('two', vm.inputValue);
         });
 
+        it('can set the input value as the selected option if the option is a string', function () {
+            vm.prop = undefined;
+            vm.selected = 'two';
+            vm.clearInputValue();
+            assert.equal('', vm.inputValue);
+            vm.setInputValue();
+            assert.equal('two', vm.inputValue);
+        });
+
         it('can respond to the input blur', function () {
             vm.selected = {name: 'two'};
             vm.dropdown = true;
