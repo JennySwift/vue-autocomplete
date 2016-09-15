@@ -3,13 +3,14 @@
 
     <autocomplete
         input-id="my-autocomplete"
+        prop="name"
         :unfiltered-options="options"
         :function-on-enter=""
         :selected.sync="selected"
     >
     </autocomplete>
 
-    <pre>{{$data.selected | json}}</pre>
+    <pre>Selected: {{$data.selected | json}}</pre>
 
 </template>
 
@@ -17,12 +18,17 @@
     module.exports = {
         data: function () {
             return {
+                //To test with objects (add prop="name" to component instance)
                 selected: {name: 'two'},
                 options: [
                     {name: 'one'},
                     {name: 'two'},
                     {name: 'three'}
                 ]
+
+                //To test with strings (remove the 'prop' attribute)
+//                selected: 'two',
+//                options: ['one', 'two', 'three']
             }
         }
     };

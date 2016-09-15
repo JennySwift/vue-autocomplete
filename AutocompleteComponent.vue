@@ -31,7 +31,8 @@
                 v-on:mousedown="selectOption($index)"
                 class="autocomplete-option"
             >
-                <div>{{ option[prop] }}</div>
+                <div v-if="prop">{{ option[prop] }}</div>
+                <div v-if="!prop">{{ option }}</div>
 
                 <!--Labels for option-->
                 <span v-if="option.assignedAlready && labelForOption" class="label label-default">
@@ -43,8 +44,9 @@
             <div v-if="autocompleteOptions.length === 0" class="no-results">No results</div>
         </div>
 
-        <pre>Selected: {{selected[prop] | json}}</pre>
+        <pre>Selected: {{selected | json}}</pre>
         <pre>Input value: {{$data.inputValue | json}}</pre>
+        <pre>Prop: {{prop | json}}</pre>
     </div>
 </template>
 
@@ -313,9 +315,8 @@
             //For if items are local
             'unfilteredOptions': {},
             //Property of the chosen option to display in input field once option is chosen
-            'prop': {
-                default: 'name'
-            },
+            //Don't give this a default because then it will think the options are objects if they are strings
+            'prop': {},
             'labelForOption': {},
             'selected': {},
             inputPlaceholder: {
