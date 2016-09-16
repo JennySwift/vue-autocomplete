@@ -365,6 +365,7 @@
 
 <style lang="sass" rel="stylesheet/scss">
     $zIndex1: 9;
+    $zIndex2: 99;
     $selected: #5cb85c;
 
     .autocomplete {
@@ -401,7 +402,8 @@
             top: 35px;
             background: white;
             width: 100%;
-            z-index: $zIndex1;
+            z-index: $zIndex2;
+            overflow: scroll;
             .autocomplete-option {
                 display: flex;
                 justify-content: space-between;
