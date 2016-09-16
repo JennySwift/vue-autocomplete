@@ -13,6 +13,18 @@
 
     <pre>Selected: {{$data.selected.object | json}}</pre>
 
+    <h2>Options are not loaded initially</h2>
+    <autocomplete
+        input-id="my-autocomplete"
+        prop="name"
+        :unfiltered-options="options.notLoaded"
+        :function-on-enter=""
+        :selected.sync="selected.notLoaded"
+    >
+    </autocomplete>
+
+    <pre>Selected: {{$data.selected.object | json}}</pre>
+
     <h2>Options with labels</h2>
     <autocomplete
         input-id="my-autocomplete"
@@ -61,6 +73,7 @@
             return {
                 selected: {
                     object: {name: 'two'},
+                    notLoaded: {},
                     withLabel: {name: 'two', label: 'Assigned', assignedAlready: false},
                     string: 'two'
                 },
@@ -70,6 +83,7 @@
                         {name: 'two'},
                         {name: 'three'}
                     ],
+                    notLoaded: [],
                     withLabels: [
                         {name: 'one', assignedAlready: true},
                         {name: 'two', assignedAlready: false},
@@ -78,6 +92,18 @@
                     strings: ['one', 'two', 'three']
                 }
             }
+        },
+        ready: function () {
+            var that = this;
+            setTimeout(function () {
+                that.options.notLoaded = [
+                    {name: 'one'},
+                    {name: 'two'},
+                    {name: 'three'}
+                ];
+                that.selected.notLoaded = {name: 'two'};
+            }, 2000);
+
         }
     };
 </script>
