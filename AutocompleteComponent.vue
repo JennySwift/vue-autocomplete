@@ -70,6 +70,9 @@
                 if (this.selected) {
                     this.setInputValue();
                 }
+            },
+            'selected': function (val, oldVal) {
+                this.setInputValue();
             }
         },
         methods: {
@@ -355,11 +358,6 @@
 //            'clear-autocomplete-field': function () {
 //                this.chosenOption = this.resetChosenOption();
 //            }
-        },
-        ready: function () {
-            if (this.selected) {
-                this.setInputValue();
-            }
         }
     };
 
