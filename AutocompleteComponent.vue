@@ -65,6 +65,13 @@
         computed: {
 
         },
+        watch: {
+            'unfilteredOptions': function (val, oldVal) {
+                if (this.selected) {
+                    this.setInputValue();
+                }
+            }
+        },
         methods: {
 
             /**
