@@ -354,6 +354,12 @@
                 default: 'Choose an option'
             },
         },
+        ready: function () {
+            var that = this;
+            setTimeout(function () {
+                that.setInputValue();
+            }, 2000);
+        },
         events: {
 //            'clear-autocomplete-field': function () {
 //                this.chosenOption = this.resetChosenOption();
