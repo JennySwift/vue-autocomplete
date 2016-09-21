@@ -218,5 +218,11 @@ describe('autocomplete component', function () {
             assert.isFalse(vm.dropdown);
             assert.equal('two', vm.inputValue);
         });
+
+        it('returns false if there is nothing selected', function () {
+            vm.selected = undefined;
+            var result = vm.setInputValue();
+            assert.isFalse(result);
+        });
     });
 });
