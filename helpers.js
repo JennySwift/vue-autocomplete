@@ -17,7 +17,10 @@ module.exports = {
      * todo: allow for sending data: add {params:data} as second argument
      */
     get: function (options) {
-        // store.showLoading();
+        if (typeof store !== "undefined") {
+            store.showLoading();
+        }
+
         Vue.http.get(options.url).then(function (response) {
             if (options.callback) {
                 options.callback(response.data);
@@ -37,7 +40,9 @@ module.exports = {
                 store.set(true, options.loadedProperty);
             }
 
-            // store.hideLoading();
+            if (typeof store !== "undefined") {
+                store.hideLoading();
+            }
         }, function (response) {
             helpers.handleResponseError(response.data, response.status);
         });
