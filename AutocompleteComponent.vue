@@ -304,7 +304,7 @@
              */
             setInputValue: function () {
                 if (!this.selected) return false;
-                
+
                 if (this.prop) {
                     this.inputValue = this.selected[this.prop];
                 }

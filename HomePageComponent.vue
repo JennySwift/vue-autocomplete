@@ -23,6 +23,15 @@
     >
     </autocomplete>
 
+    <h2>Options are from URL</h2>
+    <autocomplete
+        input-id="my-autocomplete"
+        prop="name"
+        url="http://localhost:63342/vue-autocomplete/url.json"
+        :function-on-enter=""
+    >
+    </autocomplete>
+
     <pre>Selected: {{$data.selected.object | json}}</pre>
 
     <h2>Options with labels</h2>
