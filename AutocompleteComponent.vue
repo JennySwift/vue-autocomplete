@@ -131,7 +131,7 @@
                 this.setInputValue();
                 this.hideDropdown();
                 this.focusNextField();
-//                this.$dispatch('option-chosen', this.chosenOption);
+                this.$dispatch('option-chosen', this.selected);
             },
 
             /**
